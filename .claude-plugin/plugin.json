@@ -1,0 +1,25 @@
+{
+  "name": "agentgamelab-skills",
+  "version": "1.0.0",
+  "description": "AgentGameLab's agent skills — turn fuzzy requests into high-density prompts (tuneup), let an agent harness improve itself on a schedule (harness-evolve), and teach until understood instead of just answering (learn-coach).",
+  "author": {
+    "name": "AgentGameLab",
+    "url": "https://agentgamelab.com"
+  },
+  "homepage": "https://github.com/AgentGameLab/skills",
+  "repository": "https://github.com/AgentGameLab/skills",
+  "license": "MIT",
+  "keywords": [
+    "agent-skills",
+    "prompt-engineering",
+    "self-improvement",
+    "teaching",
+    "claude-code",
+    "chinese"
+  ],
+  "skills": [
+    "./skills/tuneup",
+    "./skills/harness-evolve",
+    "./skills/learn-coach"
+  ]
+}

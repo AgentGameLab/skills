@@ -1,0 +1,22 @@
+{
+  "name": "agentgamelab",
+  "owner": {
+    "name": "AgentGameLab",
+    "url": "https://agentgamelab.com"
+  },
+  "description": "AgentGameLab's open agent skills, as an installable Claude Code plugin.",
+  "plugins": [
+    {
+      "name": "agentgamelab-skills",
+      "source": "./",
+      "description": "Three production skills from a small AI-native game studio: tuneup (fuzzy request to high-density prompt), harness-evolve (self-evolving agent harness with L1/L2/L3 risk tiers), learn-coach (teach to mastery, not just answers).",
+      "category": "productivity",
+      "keywords": [
+        "prompt-engineering",
+        "self-improvement",
+        "teaching",
+        "agent-harness"
+      ]
+    }
+  ]
+}
