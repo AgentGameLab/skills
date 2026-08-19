@@ -9,13 +9,15 @@
     {
       "name": "agentgamelab-skills",
       "source": "./",
-      "description": "Three production skills from a small AI-native game studio: tuneup (fuzzy request to high-density prompt), harness-evolve (self-evolving agent harness with L1/L2/L3 risk tiers), learn-coach (teach to mastery, not just answers).",
+      "description": "Production skills from a small AI-native game studio: tuneup (fuzzy request to high-density prompt), harness-evolve (self-evolving agent harness with L1/L2/L3 risk tiers), learn-coach (teach to mastery, not just answers), game-copy-polish (game writing craft + mechanical AI-pattern scanner).",
       "category": "productivity",
       "keywords": [
         "prompt-engineering",
         "self-improvement",
         "teaching",
-        "agent-harness"
+        "agent-harness",
+        "game-writing",
+        "copy-polish"
       ]
     }
   ]

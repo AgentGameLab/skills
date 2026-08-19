@@ -1,7 +1,7 @@
 # AgentGameLab Skills
 
-> Three agent skills we actually run every day, packaged as one installable Claude Code plugin.
-> 三个我们每天在用的 Agent Skill，打包成一个可安装的 Claude Code plugin。
+> Agent skills we actually run every day, packaged as one installable Claude Code plugin.
+> 我们每天在用的 Agent Skill，打包成一个可安装的 Claude Code plugin。
 
 We're a small AI-native game studio. These skills aren't demos — they're the ones that survived contact with daily work: getting the model to understand what we meant, keeping the agent harness from rotting, and learning new domains fast enough to ship in them.
 
@@ -26,6 +26,7 @@ cp -r skills/skills/tuneup ~/.claude/skills/
 | [**tuneup**](skills/tuneup/SKILL.md) | Turns a fuzzy request into a high-information-density prompt — triage → 4-quadrant forging → domain-expert lens → theory anchors | You keep rephrasing the same ask and the model keeps missing it |
 | [**harness-evolve**](skills/harness-evolve/SKILL.md) | One pass: track frontier research → self-audit config → act within L1/L2/L3 risk tiers → append-only run log | Your agent's config only gets touched when it breaks |
 | [**learn-coach**](skills/learn-coach/SKILL.md) | Upgrades "give the answer" into "teach until understood" — Feynman recall / Socratic questioning / scaffolding / productive failure | You want a mental model you keep, not an answer you forget |
+| [**game-copy-polish**](skills/game-copy-polish/SKILL.md) | Game writing craft (narrative spine + 8 techniques + 4 genre standards) + mechanical AI-pattern scanner (`check_prose.py`) | Your game copy reads like AI wrote it — or you want to make sure it doesn't |
 
 ### tuneup
 
@@ -39,11 +40,15 @@ Turns your harness (config files, routing rules, memory layout, persona docs) fr
 
 The biggest failure mode of LLM teaching is saying too much at once — any pedagogy gets crushed under an 800-word monologue. Every rule in this skill fights that instinct. Chinese-first with plain-language glosses for every term; ships with an eval set. Reverse exemption: lookup questions, production firefighting, or an explicit "just tell me" get a straight answer with no teaching loop.
 
+### game-copy-polish
+
+Two halves: **Part A** teaches the craft (McKee controlling idea, Greimas actants, Church FADT for game-story isomorphism, eight writing techniques, four genre × voice standards), **Part B** catches the symptoms (a 639-line pure-Python scanner that flags 翻案腔 pivots, AI jargon, punctuation density, nominalization, metaphor clusters, sentence-length uniformity, and more). Chinese-first; built for card games, roguelikes, and any game that ships flavor text.
+
 ## Notes
 
 - Skills are markdown. Read them before you install them — that's the whole point of the format.
-- `tuneup` and `learn-coach` are written Chinese-first (they're built around Chinese-language teaching and prompting); `harness-evolve` is bilingual. All three work in English.
-- Previously published as three separate repos ([tuneup](https://github.com/AgentGameLab/tuneup) · [harness-evolve](https://github.com/AgentGameLab/harness-evolve) · [learn-coach](https://github.com/AgentGameLab/learn-coach)). Those stay up as redirects; this repo is now the canonical home.
+- `tuneup`, `learn-coach`, and `game-copy-polish` are written Chinese-first; `harness-evolve` is bilingual. All four work in English.
+- `tuneup`, `harness-evolve`, and `learn-coach` were previously published as separate repos ([tuneup](https://github.com/AgentGameLab/tuneup) · [harness-evolve](https://github.com/AgentGameLab/harness-evolve) · [learn-coach](https://github.com/AgentGameLab/learn-coach)). Those stay up as redirects; this repo is now the canonical home.
 
 ## License
 
