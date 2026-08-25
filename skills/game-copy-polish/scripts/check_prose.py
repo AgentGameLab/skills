@@ -104,6 +104,21 @@ PIVOT_PATTERNS = (
     re.compile(r"看似[^。！？\n]{0,90}(?:其实|实际|实则)"),
 )
 
+SYSTEM_JARGON_PATTERNS = (
+    re.compile(
+        r"牌池|牌库|卡池|排盘界面|UI|界面|操作面|校准|参数|数值|回合制|增益|减益|debuff|buff|冷却|CD|结算面板|主循环|状态机|阶段标记"
+    ),
+    re.compile(
+        r"(?:^|(?<=[\s，。！？、；：,.!?;:「」『』“”‘’（）()【】\[\]《》〈〉—…]))P[123](?![A-Za-z])"
+    ),
+)
+
+MECHANICAL_SIMILE_PATTERNS = (
+    re.compile(
+        r"(?:像|如同|好比|仿佛|犹如)[^，。！？；：、,.!?;:“”‘’「」『』（）()【】\[\]《》〈〉—…\n]{0,8}(?:系统|机制|机器|零件|程序|齿轮|开关|数据|引擎|模块|流程|算法)"
+    ),
+)
+
 SEMANTIC_PIVOT_PATTERNS = (
     re.compile(r"(?:总|一直|曾|都)?以为[^！？\n]{2,60}?(?:其实|才发现|才明白|才知道|后来才)"),
     re.compile(r"(?:总|都|一直)以为[^！？\n]{2,60}?[。，](?:可|但|其实)"),
@@ -219,6 +234,10 @@ def line_number(text: str, position: int) -> int:
 def excerpt(value: str, width: int = 72) -> str:
     value = re.sub(r"\s+", " ", value).strip()
     return value if len(value) <= width else value[: width - 1] + "…"
+
+
+def quote_style_mix(text: str) -> tuple[int, int]:
+    return text.count("「"), text.count("“")
 
 
 def mask_non_prose(text: str) -> str:
@@ -476,6 +495,43 @@ def main() -> int:
             f"禁用翻案句，第 {line_number(text, match.start())} 行，"
             f"“{excerpt(match.group())}”"
         )
+
+    system_jargon = all_matches(prose, SYSTEM_JARGON_PATTERNS)
+    for match in system_jargon:
+        warnings.append(
+            f"系统行话疑似泄入正文，第 {line_number(text, match.start())} 行，"
+            f"“{excerpt(match.group())}”"
+        )
+
+    mechanical_similes = all_matches(prose, MECHANICAL_SIMILE_PATTERNS)
+    for match in mechanical_similes:
+        failures.append(
+            f"万能比喻，第 {line_number(text, match.start())} 行，"
+            f"“{excerpt(match.group())}”"
+        )
+
+    corner_quote_count, double_quote_count = quote_style_mix(prose)
+    if corner_quote_count and double_quote_count:
+        if corner_quote_count <= double_quote_count:
+            minority_symbol = "「"
+            minority_label = "「」"
+            minority_count = corner_quote_count
+        else:
+            minority_symbol = "“"
+            minority_label = "“”"
+            minority_count = double_quote_count
+        minority_lines = "、".join(
+            str(line_number(text, match.start()))
+            for match in list(re.finditer(re.escape(minority_symbol), prose))[:3]
+        )
+        message = (
+            f"引号体例不统一，「」共 {corner_quote_count} 处，“”共 {double_quote_count} 处；"
+            f"少数体例 {minority_label} 出现在第 {minority_lines} 行。"
+        )
+        if minority_count >= 2:
+            failures.append(message)
+        else:
+            warnings.append(message)
 
     occupied_spans = [match.span() for match in pivots]
     semantic_pivots = []
