@@ -30,7 +30,7 @@ cp -r skills/skills/tuneup ~/.claude/skills/
 
 ### tuneup
 
-`/tuneup <task>` optimizes your input and immediately executes it, automatically adding the relevant expert perspective. Say “只给 prompt” or “先别执行” for prompt-only output. `/tuneup <需求>` 默认优化后直接执行；要指令稿时明确说“只给 prompt”或“做成模板”。
+`/tuneup <task>` optimizes your input and immediately executes it, automatically adding the relevant expert perspective. `/tuneup <需求>` 优化后直接执行，交付任务结果。
 
 The user who most needs it doesn't know the word "prompt" — they're just repeating themselves. tuneup notices that pattern and steps in. Triage routes every request (fast lane / main lane / ER lane); the main lane silently classifies by complexity × precision and forges a conversational, template, structured-XML, or Lisp-style prompt accordingly. Finance / legal / medical / irreversible-decision asks hard-trigger a domain-expert lens **plus** a mandatory safety boundary.
 
